@@ -4,13 +4,15 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import { Contact } from "./pages/Contact";
+import { Contact, contactData } from "./pages/Contact";
 import { Home } from "./pages/Home";
 import { About } from "./pages/About";
 import { Movie } from "./pages/Movie";
 import { AppLayout } from "./components/layout/AppLayout";
 import { ErrorPage } from "./pages/ErrorPage";
 import { getMoviesData } from "./api/GetApiData";
+import { MovieDetails } from "./ui/MovieDetails";
+import { getMoviesDetails } from "./api/GetMovieDetails";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -33,8 +35,14 @@ const App = () => {
           loader: getMoviesData,
         },
         {
+          path: "/movie/:movieID",
+          element: <MovieDetails />,
+          loader: getMoviesDetails,
+        },
+        {
           path: "/contact",
           element: <Contact />,
+          action: contactData,
         },
       ],
     },
